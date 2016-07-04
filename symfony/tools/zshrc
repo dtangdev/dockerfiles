@@ -1,0 +1,12 @@
+# Path to the oh-my-zsh installation.
+export ZSH=/home/docker/.oh-my-zsh
+
+# No theme
+ZSH_THEME=""
+
+# Plugins
+plugins=(symfony2 composer npm node history ant)
+
+# User configuration
+export PATH=$PATH:/usr/local/bin
+source $ZSH/oh-my-zsh.sh
