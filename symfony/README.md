@@ -26,17 +26,6 @@
 - git
 - wget
 
-## Symfony environment variables
-
-Three variables will be exposed in Symfony, in the `php` and the `tools` containers.
-Of course, it relies on the fact that you will expose these variables in the containers.
-
-Symfony           |Environment
-------------------|---------------------
-DATABASE__NAME    |DB_ENV_MYSQL_DATABASE
-DATABASE__USER    |DB_ENV_MYSQL_USER
-DATABASE__PASSWORD|DB_ENV_MYSQL_PASSWORD
-
 ## How to use it
 
 Use the `tools` to use composer or symfony cli tools : `docker-compose run --rm tools`

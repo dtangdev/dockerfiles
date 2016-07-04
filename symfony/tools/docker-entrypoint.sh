@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-
-# Symfony environment
-export SYMFONY__DATABASE__NAME=$DB_ENV_MYSQL_DATABASE
-export SYMFONY__DATABASE__USER=$DB_ENV_MYSQL_USER
-export SYMFONY__DATABASE__PASSWORD=$DB_ENV_MYSQL_PASSWORD
-
-exec "$@"

@@ -53,9 +53,4 @@ RUN mv composer.phar /usr/local/bin/composer
 
 ADD zshrc /home/docker/.zshrc
 
-# Entrypoint
-COPY ./docker-entrypoint.sh /
-RUN chmod +x /docker-entrypoint.sh
-ENTRYPOINT ["/docker-entrypoint.sh"]
-
 CMD ["/bin/zsh"]

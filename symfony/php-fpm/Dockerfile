@@ -30,22 +30,18 @@ RUN apt-get update && apt-get install -y \
     blackfire-php
 
 # Install blackfire
-RUN export VERSION=`php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;"` \
-    && curl -A "Docker" -o /tmp/blackfire-probe.tar.gz -D - -L -s https://blackfire.io/api/v1/releases/probe/php/linux/amd64/${VERSION} \
+RUN version=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;") \
+    && curl -A "Docker" -o /tmp/blackfire-probe.tar.gz -D - -L -s https://blackfire.io/api/v1/releases/probe/php/linux/amd64/$version \
     && tar zxpf /tmp/blackfire-probe.tar.gz -C /tmp \
-    && mv /tmp/blackfire-*.so `php -r "echo ini_get('extension_dir');"`/blackfire.so \
-    && echo "extension=blackfire.so\nblackfire.agent_socket=\${BLACKFIRE_PORT}" > /etc/php/7.0/fpm/conf.d/90-blackfire.ini
+    && mv /tmp/blackfire-*.so $(php -r "echo ini_get('extension_dir');")/blackfire.so \
+    && printf "extension=blackfire.so\nblackfire.agent_socket=tcp://blackfire:8707\n" > /etc/php/7.0/fpm/conf.d/blackfire.ini
+
 
 # Add the app configuration
 ADD symfony.ini /etc/php/7.0/fpm/conf.d/
 ADD symfony.ini /etc/php/7.0/cli/conf.d/
 ADD symfony.pool.conf /etc/php/7.0/fpm/pool.d/
 RUN rm -f /etc/php/7.0/fpm/pool.d/www.conf
-
-# Entrypoint
-COPY ./docker-entrypoint.sh /
-RUN chmod +x /docker-entrypoint.sh
-ENTRYPOINT ["/docker-entrypoint.sh"]
 
 CMD ["php-fpm7.0", "-F"]
 
