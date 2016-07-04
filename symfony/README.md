@@ -51,7 +51,7 @@ services:
 
   # Data container
   data:
-      build: ./docker/data
+      image: leadz/symfony-base
       volumes:
           - ".:/home/docker/public_html"
       user: docker
@@ -122,5 +122,6 @@ services:
          - db
      environment:
          - SSH_AUTH_SOCK
+         - OH_MY_ZSH_THEME=bureau
 
 ```
