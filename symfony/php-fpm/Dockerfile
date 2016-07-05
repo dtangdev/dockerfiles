@@ -7,10 +7,6 @@ RUN mkdir -p /run/php
 RUN echo "deb http://packages.dotdeb.org jessie all" > /etc/apt/sources.list.d/dotdeb.list
 RUN wget -O - https://www.dotdeb.org/dotdeb.gpg | apt-key add -
 
-# Add the blackfire repository
-RUN curl https://packagecloud.io/gpg.key 2> /dev/null | apt-key add -
-RUN echo "deb http://packages.blackfire.io/debian any main" | tee /etc/apt/sources.list.d/blackfire.list
-
 # Install the packages
 RUN apt-get update && apt-get install -y \
     php7.0-dev \
@@ -26,8 +22,7 @@ RUN apt-get update && apt-get install -y \
     php7.0-xdebug \
     php7.0-memcache \
     php7.0-apcu \
-    php7.0-xml \
-    blackfire-php
+    php7.0-xml
 
 # Install blackfire
 RUN version=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;") \
