@@ -38,20 +38,9 @@ version: '2'
 
 services:
 
-  # Data container
-  data:
-      image: leadz/symfony-base
-      volumes:
-          - ".:/home/docker/public_html"
-      user: docker
-      working_dir: "/home/docker/public_html"
-      tty: true
-
   # Nginx container
   nginx:
       image: leadz/symfony-nginx
-      volumes_from:
-          - data
       ports:
           - "80:80"
       links:
@@ -60,8 +49,8 @@ services:
   # Php container
   php:
       image: leadz/symfony-php-fpm
-      volumes_from:
-          - data
+      volumes:
+          - ".:/home/docker/public_html"
       expose:
           - "9000"
       links:
@@ -102,11 +91,9 @@ services:
      volumes:
          - $SSH_AUTH_SOCK:$SSH_AUTH_SOCK
      volumes_from:
-         - data
+         - php
      working_dir: "/home/docker/public_html"
      user: docker
-     expose:
-         - "9000"
      links:
          - db
      environment:
