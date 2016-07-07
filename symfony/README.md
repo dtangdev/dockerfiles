@@ -9,7 +9,7 @@
 
 **Nginx** : 
 
-- nginx 1.6.2 (from debian:jessie)
+- nginx 1.10.1 (from debian:jessie)
 
 **Php-fpm** : 
 
@@ -41,6 +41,8 @@ services:
   # Nginx container
   nginx:
       image: leadz/symfony-nginx
+      volumes_from:
+          - php
       ports:
           - "80:80"
       links:
