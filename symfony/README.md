@@ -18,7 +18,7 @@
 
 **Tools** : 
 
-- node (4.x) & npm
+- node (6.x) & npm (3)
 - composer
 - ant
 - zsh & oh-my-zsh

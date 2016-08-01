@@ -14,7 +14,7 @@ RUN echo "deb http://packages.dotdeb.org jessie all" > /etc/apt/sources.list.d/d
 RUN curl https://www.dotdeb.org/dotdeb.gpg 2> /dev/null | apt-key add -
 
 # Add nodejs repository
-RUN curl -sL https://deb.nodesource.com/setup_4.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
 
 # Install the required packages
 RUN apt-get update && apt-get install -y \
@@ -37,9 +37,6 @@ RUN apt-get update && apt-get install -y \
     unzip \
     zsh \
     nodejs
-
-# Install npm
-RUN npm install npm -g
 
 # Change docker user default shell
 RUN chsh -s /usr/bin/zsh docker
